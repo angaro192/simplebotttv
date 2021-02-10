@@ -1,0 +1,49 @@
+<div class="conteiner">
+    <div id="alerta" class="alerta" style="display: none;">
+        <img id="imgAlerta" class="alertaImg" src="/img/Follow-Alerta.png" alt="" srcset="">
+        <span id="mensagem">-------</span>  
+        <div id="audio"></div>
+    </div>
+</div>
+
+<script>
+    var divAlerta = document.getElementById("alerta");
+    var imgAlerta = document.getElementById("imgAlerta");
+    var msgAlerta = document.getElementById("mensagem");
+    var divAudio = document.getElementById("audio");
+    
+    socket.on('alertas', (data) => {
+        console.log(data)
+        var tipo = data[0];
+        var mensagem = data[1];
+        habilitar(tipo, mensagem)
+    })
+
+    function habilitar(tipo, mensagem){
+        divAlerta.style.display = "block";
+        imgAlerta.src = "/img/"+tipo+"-Alerta.png";
+        msgAlerta.innerHTML = mensagem;
+        divAudio.innerHTML = '<video id="vvv" src="/sons/follow.wav" controls preload autoplay ></video>';
+        setTimeout(()=>{
+            divAlerta.style.display = "none";
+        }, 5000)
+    }
+</script>
+
+<style>
+    .alertaImg{
+        width: 100%;
+    }
+    .conteiner{       
+    }
+    .conteiner span{
+        position: absolute;
+        text-align: center;
+        width: 655px;
+        left: 70px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #fff;
+        top: 65px;
+    }
+</style>

@@ -1,0 +1,95 @@
+<div id="box" class="box">
+    <div class="imagem">
+        <img id="imgUser" src="" alt="" srcset="">
+    </div>
+    <div class="conteudo">
+        <span id="userName" class="display_name">------------</span>
+        <br>
+    </div>
+</div>
+
+<script>
+    const channel = "{{channel}}"
+    const socket = io();
+
+    socket.on('connect', () => {
+        socket.emit('joinRoom', channel);
+    })
+    socket.on('overlayer', (data) => {
+        console.log(data)
+        if(data){
+            if(data[0] === "Usuario não encontrado"){
+
+            }else{
+                habilitarBox()
+                mudarImg(data[0])
+                mudarNome(data[1])
+                setTimeout(desabilitarBox, 15000)
+            }
+            
+        }
+    })
+
+    var boxElemento = document.getElementById("box")
+    var imgUserElm = document.getElementById("imgUser")
+    var userName = document.getElementById("userName")
+
+    function mudarNome(userNamee){
+        userName.innerText = userNamee
+    }
+
+    function mudarImg(img){
+        imgUserElm.src = img
+    }
+
+    function habilitarBox(){
+        boxElemento.style.display = "block"
+    }
+
+    function desabilitarBox(){
+        boxElemento.style.display = "none"
+    }
+</script>
+
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .box{
+        width: 300px;
+        display: none;
+        will-change: opacity, transform, visibility;
+    }
+    .imagem img{
+        animation: rotImg 6s infinite reverse;
+        border-radius: 150px;
+        margin-bottom: 5px;
+    }
+    .conteudo{
+        text-align: center;
+        height: 60px;
+        border-radius: 10px;
+        position: absolute;
+        width: 300px;
+        background-color: #222c38;
+    }
+    .conteudo span{
+        position: relative;
+        top: 30%;
+        transform: translate(0, -50%);
+        color: #9d9d9d;
+        font-weight: bold;
+        font-size: 22;
+    }
+    .display_name{
+    }
+
+    @keyframes rotImg {
+        0% { transform: rotateY(0deg);}
+        50% { transform: rotateY(180deg);}
+        100% { transform: rotateY(360deg);}
+    }
+
+</style>

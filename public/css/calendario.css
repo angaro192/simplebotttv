@@ -1,0 +1,50 @@
+.calendario {
+    width: 280px;
+    height: auto;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, .5);
+}
+
+.calendario .datas {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px,1fr));
+    grid-gap: 10px;
+}
+
+.calendario .datas div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    color: #262626;
+}
+
+.calendario .datas div.dia {
+    font-weight: 700;
+}
+
+.calendario .datas div.dia:first-child, 
+.calendario .datas div.numero:nth-child(7n+1)
+ {
+    color: #ff685d;
+    font-weight: 700;
+}
+
+.calendario .datas div.numero.active,
+.calendario .datas div.numero:hover
+{
+    background: #009688;
+    color: #FFFFFF;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.calendario .datas div.numero.evento
+{
+    background: #F57720;
+    color: #FFFFFF;
+    font-weight: 700;
+    cursor: pointer;
+}

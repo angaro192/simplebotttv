@@ -1,0 +1,24 @@
+<div id="hora"></div>
+<div><input id="acrescentar" type="text"><input type="button" value="Acrescentar" onclick="horaAtual()"></div>
+<script>
+  var tms = "";
+  hoje = new Date();
+  h = hoje.getHours();
+  m = hoje.getMinutes();
+  s = hoje.getSeconds();
+  var vDMinutos = document.getElementById("hora");
+  vDMinutos.innerHTML+=h+':'+m+':'+s + "| " + hoje.getDate()
+
+  function horaAtual(){
+    
+    hoje2 = new Date();
+    hoje2.setMinutes(hoje2.getMinutes()+120);
+    //hoje2 = hoje.setHours(hoje.getHours()+2);
+    h2 = hoje2.getHours();
+    m2 = hoje2.getMinutes();
+    s2 = hoje2.getSeconds();
+    vDMinutos.innerHTML+="<br>"+h2+':'+m2+':'+s2 + "| " + hoje2.getDate()
+  }
+//01:20 + 2:43 | 02:20 ; 103 | 03:20 ; 43
+
+</script>
